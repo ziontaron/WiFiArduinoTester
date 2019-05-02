@@ -24,8 +24,9 @@ bool printWebData = false;  // set to false for better speed measurement
 String OP="ArdWiFi-01";
 String Value="110011";
 String Status="TestWiFi";
+int PartsProd=0;
 
-String PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Status+"\"}";
+String PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Status+"\",\"PartsProduced\": "+PartsProd+"}";
 String UrlPath_q="/Production/Sample?OP="+OP+"&Value="+Value+"&Status="+Status;
 String UrlPath="/Production/Sample";
 /////////////////////////////////////////////////////////////
