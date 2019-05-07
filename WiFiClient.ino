@@ -10,9 +10,9 @@
 
 WiFiClient client;
 
-const char* host = "data.sparkfun.com";
-const char* streamId   = "....................";
-const char* privateKey = "....................";
+//const char* host = "data.sparkfun.com";
+//const char* streamId   = "....................";
+//const char* privateKey = "....................";
 
 
 unsigned long beginMicros, endMicros;
@@ -50,13 +50,13 @@ int lastButtonState = HIGH;   // the previous reading from the input pin
 // milliseconds, will quickly become a bigger number than can be stored in an int.
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
 unsigned long debounceDelay = 50;    // the debounce time; increase if the output flickers
+
 ////////////////////////////////////////////////////////////////////
 
 void setup() {
   //Serial.begin(115200);
   Serial.begin(9600);
   delay(10);
-
 ///////////////////////////////////////////////////
   pinMode(buttonPin, INPUT);
   pinMode(ledPin, OUTPUT);
@@ -65,40 +65,16 @@ void setup() {
   // set initial LED state
   digitalWrite(ledPin, ledState);
 ///////////////////////////////////////////////////
-
-
   // We start by connecting to a WiFi network  
   Wifi_SetUp();
-  inputString.reserve(200);
-  
+  inputString.reserve(200);  
 }
 
 int value = 0;
 
 void loop() {
-  //delay(5000);
-
-    PostTrigger();
-
-//  int reading = digitalRead(buttonPin);
-//
-//  Serial.println(reading);
-    
-  delay(10);
-    
-if (stringComplete) {
-    Serial.println(inputString);
-    // clear the string:
-    inputString = "";
-    stringComplete = false;
-  }
   
-  // Read all the lines of the reply from server and print them to Serial
-//  while(client.available()){
-//    String line = client.readStringUntil('\r');
-//    Serial.print(line);
-//  }
-//  
-//  Serial.println();
-//  Serial.println("closing connection");
+  PostTrigger();
+  SerialRead();
+  
 }
