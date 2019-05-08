@@ -2,7 +2,7 @@
 char server[] = "apps.capsonic.com";    // name address for Google (using DNS)
  void PostDataFunc()
   {
-      PartsProd++;
+      //PartsProd++;
       PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Status+"\",\"PartsProduced\": "+PartsProd+"}";
     
       Serial.println("Post Sent");

@@ -1,6 +1,4 @@
 
-const char* ssid     = "C@P WIFI";
-const char* password = "C@psonic01!";
 
 void Wifi_SetUp()
 {

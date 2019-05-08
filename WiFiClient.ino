@@ -21,10 +21,21 @@ bool printWebData = false;  // set to false for better speed measurement
 
 /////////////////////////////////////////////////////////////
 
-String OP="ArdWiFi-01";
+String Device="ArdWiFi-01";
+String OP="Mold 74";
+const char* ssid     = "C@P WIFI";
+const char* password = "C@psonic01!";
 String Value="110011";
 String Status="TestWiFi";
-int PartsProd=0;
+
+/////CONFIG FLAGS///////
+
+bool ChgDevName=false;
+bool ChgOPName=false;
+bool CfgMode=false;
+bool PartsPCycle=false;
+String PartsProd="1";
+////////////////////////
 
 String PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Status+"\",\"PartsProduced\": "+PartsProd+"}";
 String UrlPath_q="/Production/Sample?OP="+OP+"&Value="+Value+"&Status="+Status;

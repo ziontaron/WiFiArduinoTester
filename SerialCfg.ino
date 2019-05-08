@@ -32,8 +32,10 @@ void SerialRead()
     
   if (stringComplete)   
     {
-      Serial.print(inputString);
+      //Serial.print(inputString);
       // clear the string:
+      
+      CommandParser(inputString);
       inputString = "";
       stringComplete = false;
     }
