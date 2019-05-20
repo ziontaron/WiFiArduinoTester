@@ -2,7 +2,8 @@
 
 void Wifi_SetUp()
 {
-  
+  bool blinkLed=false;
+  EEPROM.begin(512);
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
@@ -10,21 +11,25 @@ void Wifi_SetUp()
   
   WiFi.begin(ssid, password);
   
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
+  while (WiFi.status() != WL_CONNECTED and contconexion <50) 
+  {
+    ++contconexion;
+    delay(250);
     Serial.print(".");
+    digitalWrite(ConLed, blinkLed); 
+    blinkLed=!blinkLed;
   }
 
   Serial.println("");
   Serial.println("WiFi connected");  
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-  bool blinkLed=false;
-  for(int i=0;i<10;i++)
-  {          
-      digitalWrite(ConLed, blinkLed);
-      blinkLed=!blinkLed;
-      delay(500);
-  }  
-      digitalWrite(ConLed, false);
+//  for(int i=0;i<10;i++)
+//  {          
+//      digitalWrite(ConLed, blinkLed);      
+//      //digitalWrite(14, blinkLed);
+//      blinkLed=!blinkLed;
+//      delay(500);
+//  }  
+      digitalWrite(ConLed, true);
   }

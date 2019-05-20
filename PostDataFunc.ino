@@ -1,13 +1,14 @@
  
-char server[] = "apps.capsonic.com";    // name address for Google (using DNS)
+char APIserver[] = "apps.capsonic.com";    // name address for Google (using DNS)
  void PostDataFunc()
   {
       //PartsProd++;
-      PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Status+"\",\"PartsProduced\": "+PartsProd+"}";
+      //PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Status+"\",\"PartsProduced\": "+PartsProd+"}";
+     PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Device+"\",\"PartsProduced\": "+PartsProd+"}";
     
       Serial.println("Post Sent");
 //    // if you get a connection, report back via serial:
-      if (client.connect(server, 80))
+      if (client.connect(APIserver, 80))
       {
         //Serial.print("connected to ");
         //Serial.println(client.remoteIP());

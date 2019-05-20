@@ -12,7 +12,9 @@ void CommandDefinition(String CMD)
      Serial.println("PARTS PER CYCLE: "+PartsProd);
      //Serial.print("IP ADDRES: ");
      //Serial.println(Ethernet.localIP());
-     Serial.print("SSII PASS: "); Serial.println(password);
+     
+     Serial.print("SSID: "); Serial.println(ssid);
+     Serial.print("SSID PASS: "); Serial.println(password);
      Serial.print("IP ADDRESS: "); Serial.println(WiFi.localIP());
      Serial.println();
      Serial.println("END CONFIGURATION PRINT");
@@ -34,13 +36,13 @@ void CommandDefinition(String CMD)
   if(CMD=="CFGMODE_ON" || CMD=="CFGMODE_ON\n")
   {
     CfgMode=true;    
-    Serial.println("OK");
+    Serial.println("CFGMODE_ON OK");
   }
 /////////////////////////////////////////////////////////////    
   if(CMD=="CFGMODE_OFF" || CMD=="CFGMODE_OFF\n")
   {
     CfgMode=false;   
-    Serial.println("OK");
+    Serial.println("CFGMODE_OFF OK");
      return;
   }
 //////////////////////////////////////////////////////////////  
@@ -55,11 +57,11 @@ void CommandDefinition(String CMD)
     if(CfgMode)
     {
       ChgDevName=true;   
-      Serial.println("OK");
+      Serial.println("DEV_NAME_EDIT OK");
     }
     else
     {
-      Serial.println("ERROR");
+      Serial.println("DEV_NAME_EDIT ERROR");
     }
      return;
   }
@@ -69,11 +71,11 @@ void CommandDefinition(String CMD)
     if(CMD!="" && CMD!="\n")
     {
       Device=CMD;   
-      Serial.println("OK"); 
+      Serial.println("NEW DEVICE NAME: "+CMD+" OK"); 
     }       
     else
     {
-      Serial.println("ERROR"); 
+      Serial.println("NEW DEVICE NAME: "+CMD+" ERROR"); 
     }
       ChgDevName=false;
      return;
@@ -89,11 +91,11 @@ void CommandDefinition(String CMD)
     if(CfgMode)
     {
       ChgOPName=true;   
-      Serial.println("OK");
+      Serial.println("OP_NAME_EDIT OK");
     }
     else
     {
-      Serial.println("ERROR");
+      Serial.println("OP_NAME_EDIT ERROR");
     }
      return;
   }
@@ -103,11 +105,11 @@ void CommandDefinition(String CMD)
     if(CMD!="" && CMD!="\n")
     {
       OP=CMD;       
-      Serial.println("OK");  
+      Serial.println("NEW OP: "+CMD+" OK");  
     }  
     else
     {
-      Serial.println("ERROR"); 
+      Serial.println("NEW OP: "+CMD+" ERROR"); 
     }
       ChgOPName=false;
      return;
@@ -124,11 +126,11 @@ void CommandDefinition(String CMD)
     if(CfgMode)
     {
       PartsPCycle=true;   
-      Serial.println("OK");
+      Serial.println("PART_PCYCLE_EDIT OK");
     }
     else
     {
-      Serial.println("ERROR");
+      Serial.println("PART_PCYCLE_EDIT ERROR");
     }
      return;
   }
@@ -148,4 +150,93 @@ void CommandDefinition(String CMD)
      return;
   }
 //////////////////////////////////////////////////////////////////////
+  if(CMD=="SAVE_CFG" || CMD=="SAVE_CFG\n")
+  {if(CfgMode)
+    { 
+      CFG_SAVE();  
+      Serial.println("SAVE_CFG OK");
+    }
+    else
+    {
+      Serial.println("SAVE_CFG ERROR");
+    }
+  }
+//////////////////////////////////////////////////////////////////////
+  if(CMD=="READ_CFG" || CMD=="READ_CFG\n")
+  {
+      CFG_LOAD();  
+      Serial.println("READ_CFG OK");
+  }
+
+//////////WIFI COMMANDS/////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+  if(CMD=="SSID" || CMD=="SSID\n")
+  {  
+    Serial.println("SSID: " + ssid);
+     return;
+  }
+//////////////////////////////////////////////////////////////
+  if(CMD=="SSID_EDIT" || CMD=="SSID_EDIT\n")
+  {
+    if(CfgMode)
+    {
+      _SSID=true;   
+      Serial.println("SSID_EDIT OK");
+    }
+    else
+    {
+      Serial.println("SSID_EDIT ERROR");
+    }
+     return;
+  }
+///////////////////////////////////////////////////////////////////
+  if(_SSID)
+  {
+    if(CMD!="" && CMD!="\n")
+    {
+      ssid=CMD;       
+      Serial.println("NEW SSID: "+ssid+" OK");  
+    }  
+    else
+    {
+      Serial.println("NEW SSID: "+ssid+" ERROR"); 
+    }
+      _SSID=false;
+     return;
+  }
+  ////////////////////////////////////////////////////////////////
+  if(CMD=="SSID_PASS" || CMD=="SSID_PASS\n")
+  {  
+    Serial.println("SSID_PASS: " + password);
+     return;
+  }
+//////////////////////////////////////////////////////////////
+  if(CMD=="SSID_PASS_EDIT" || CMD=="SSID_PASS_EDIT\n")
+  {
+    if(CfgMode)
+    {
+      _PASS=true;   
+      Serial.println("SSID_PASS_EDIT OK");
+    }
+    else
+    {
+      Serial.println("SSID_PASS_EDIT ERROR");
+    }
+     return;
+  }
+///////////////////////////////////////////////////////////////////
+  if(_PASS)
+  {
+    if(CMD!="" && CMD!="\n")
+    {
+      password=CMD;       
+      Serial.println("NEW SSID_PASS: "+password+" OK");  
+    }  
+    else
+    {
+      Serial.println("NEW SSID_PASS: "+password+" ERROR"); 
+    }
+      _PASS=false;
+     return;
+  }
 }

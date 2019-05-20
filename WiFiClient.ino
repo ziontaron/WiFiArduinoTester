@@ -1,21 +1,12 @@
-/*
- *  This sketch sends data via HTTP GET requests to data.sparkfun.com service.
- *
- *  You need to get streamId and privateKey at data.sparkfun.com and paste them
- *  below. Or just customize this script to talk to other HTTP servers.
- *
- */
-
 #include <ESP8266WiFi.h>
+#include <EEPROM.h>
+#include <ESP8266WebServer.h>
 
 WiFiClient client;
+ESP8266WebServer server(80);
 
-//const char* host = "data.sparkfun.com";
-//const char* streamId   = "....................";
-//const char* privateKey = "....................";
-
-
-unsigned long beginMicros, endMicros;
+//unsigned long beginMicros, endMicros;
+int contconexion = 0;
 unsigned long byteCount = 0;
 bool printWebData = false;  // set to false for better speed measurement
 
@@ -23,10 +14,15 @@ bool printWebData = false;  // set to false for better speed measurement
 
 String Device="ArdWiFi-01";
 String OP="Mold 74";
-const char* ssid     = "C@P WIFI";
-const char* password = "C@psonic01!";
+//const char* ssid     = "C@P WIFI";
+//const char* password = "C@psonic01!";
+String ssid     = "C@P WIFI";
+String password = "C@psonic01!";
+//String ssid     = "C@PEP";
+//String password = "9158723500";
 String Value="110011";
 String Status="TestWiFi";
+String PartsProd="1";
 
 /////CONFIG FLAGS///////
 
@@ -34,7 +30,9 @@ bool ChgDevName=false;
 bool ChgOPName=false;
 bool CfgMode=false;
 bool PartsPCycle=false;
-String PartsProd="1";
+bool _SSID=false;
+bool _PASS=false;
+bool _Loged = false;
 ////////////////////////
 
 String PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Status+"\",\"PartsProduced\": "+PartsProd+"}";
@@ -48,9 +46,10 @@ bool stringComplete = false;  // whether the string is complete
 
 ///////////////////////////////////////////////////////////////////////////
 // constants won't change. They're used here to set pin numbers:
-const int buttonPin = 16;    // the number of the pushbutton pin
-const int ledPin = 12;      // the number of the LED pin
-const int ConLed = 12;      // the number of the LED pin
+const int buttonPin = 13;    // the number of the pushbutton pin 16
+const int ModeButton = 12;    // the number of the pushbutton pin 16
+const int ledPin = 16;      // the number of the LED pin
+const int ConLed = 14;      // the number of the LED pin
 
 // Variables will change:
 int ledState = HIGH;         // the current state of the output pin
@@ -65,20 +64,33 @@ unsigned long debounceDelay = 50;    // the debounce time; increase if the outpu
 ////////////////////////////////////////////////////////////////////
 
 void setup() {
-  //Serial.begin(115200);
-  Serial.begin(9600);
+  Serial.begin(115200);
+  //Serial.begin(9600);
   delay(10);
+  
+  EEPROM.begin(512);
 ///////////////////////////////////////////////////
   pinMode(buttonPin, INPUT);
+  pinMode(ModeButton, INPUT);
   pinMode(ledPin, OUTPUT);
-  //pinMode(ConLed, OUTPUT);
+  pinMode(ConLed, OUTPUT);
 
   // set initial LED state
   digitalWrite(ledPin, ledState);
+  digitalWrite(ConLed, LOW);
 ///////////////////////////////////////////////////
+  
+  if (digitalRead(ModeButton) == 0) {
+    modoconf();
+  }
+ 
+  CFG_LOAD();
   // We start by connecting to a WiFi network  
+  WiFi.softAPdisconnect (true);
   Wifi_SetUp();
-  inputString.reserve(200);  
+  inputString.reserve(200); 
+  CommandDefinition("CFG_PRINT");
+  IOT_Mode();
 }
 
 int value = 0;
@@ -87,5 +99,5 @@ void loop() {
   
   PostTrigger();
   SerialRead();
-  
+  server.handleClient();
 }
