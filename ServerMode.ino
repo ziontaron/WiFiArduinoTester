@@ -8,8 +8,11 @@ String AdminPass="admin";
 String mensaje = "";
 
 void paginaconf() {
+  
+  LoadWebPage();
   if(_Loged==true)
   {
+  Serial.println(pagina);
     server.send(200, "text/html", pagina + mensaje + paginafin); 
   }
   else
@@ -40,12 +43,6 @@ void modoconf() {
   Serial.println(myIP);
   Serial.println("WebServer iniciado...");
 
-  pagina.replace("@ssid", ssid);
-  pagina.replace("@pass", password);
-  pagina.replace("@dev_name", Device);
-  pagina.replace("@op_name", OP);
-  pagina.replace("@partcycle", PartsProd);
-
   server.on("/", paginaconf); //esta es la pagina de configuracion
   server.on("/guardar_conf", guardar_conf); //Graba en la eeprom la configuracion
   server.on("/escanear", escanear); //Escanean las redes wifi disponibles
@@ -70,7 +67,7 @@ void IOT_Mode()
   server.on("/escanear", escanear); //Escanean las redes wifi disponibles
   server.on("/Login", Login); //Escanean las redes wifi disponibles
   server.on("/exit", Login); //Escanean las redes wifi disponibles
-  
+  LoadWebPage();
   server.begin();
   } 
 void Close()
@@ -86,6 +83,7 @@ if(server.arg("login")==UserName&&server.arg("pass")==AdminPass)
 {
   _Loged=true;
   mensaje = "";
+  LoadWebPage();
   paginaconf();
   }
  else
@@ -99,21 +97,27 @@ void guardar_conf() {
   
   if(server.arg("ssid")!=""||server.arg("pass")!=""||server.arg("dev_name")!=""||server.arg("op_name")!=""||server.arg("pp_cycle")!="")
   {
-  Serial.println(server.arg("ssid"));//Recibimos los valores que envia por GET el formulario web
-  EEPROM_SAVE(server.arg("ssid")+'\0',ADDR_ssid);  
-  //grabar(0,server.arg("ssid"));
-  Serial.println(server.arg("pass"));
-  EEPROM_SAVE(server.arg("pass")+'\0',ADDR_password);
+  ssid=server.arg("ssid");
+  Serial.println(ssid);//Recibimos los valores que envia por GET el formulario web
+  //EEPROM_SAVE(ssid,ADDR_ssid); 
   
-  Serial.println(server.arg("dev_name"));
-  EEPROM_SAVE(server.arg("dev_name")+'\0',ADDR_Device);
-  
-  Serial.println(server.arg("op_name"));
-  EEPROM_SAVE(server.arg("op_name")+'\0',ADDR_OP);
-  
-  Serial.println(server.arg("pp_cycle"));
-  EEPROM_SAVE(server.arg("pp_cycle")+'\0',ADDR_PartsProd);
+  password =server.arg("pass");
+  Serial.println(password);
+//  EEPROM_SAVE(password,ADDR_password);
 
+  Device=server.arg("dev_name");
+  Serial.println(Device);
+//  EEPROM_SAVE(Device,ADDR_Device);
+
+  OP=server.arg("op_name");
+  Serial.println(OP);
+//  EEPROM_SAVE(OP,ADDR_OP);
+  
+  PartsProd=server.arg("pp_cycle");
+  Serial.println(PartsProd);
+//  EEPROM_SAVE(PartsProd,ADDR_PartsProd);
+
+  CFG_SAVE();
   mensaje = "CONFIGURATION SAVED...";
   paginaconf();
   }

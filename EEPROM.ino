@@ -7,16 +7,31 @@ int ADDR_PartsProd = 400;
 
 void CFG_SAVE()
 { 
-  EEPROM_SAVE(Device+'\0',ADDR_Device);
+//  EEPROM_SAVE(Device+'\0',ADDR_Device);
+//  delay(100);
+//  EEPROM_SAVE(OP+'\0',ADDR_OP);
+//  delay(100);
+//  EEPROM_SAVE(ssid+'\0',ADDR_ssid);
+//  delay(100);
+//  EEPROM_SAVE(password+'\0',ADDR_password);
+//  delay(100);
+//  EEPROM_SAVE(PartsProd+'\0',ADDR_PartsProd);
+//  delay(100);
+
+
+  EEPROM_SAVE(Device,ADDR_Device);
   delay(100);
-  EEPROM_SAVE(OP+'\0',ADDR_OP);
+  EEPROM_SAVE(OP,ADDR_OP);
   delay(100);
-  EEPROM_SAVE(ssid+'\0',ADDR_ssid);
+  EEPROM_SAVE(ssid,ADDR_ssid);
   delay(100);
-  EEPROM_SAVE(password+'\0',ADDR_password);
+  EEPROM_SAVE(password,ADDR_password);
   delay(100);
-  EEPROM_SAVE(PartsProd+'\0',ADDR_PartsProd);
+  EEPROM_SAVE(PartsProd,ADDR_PartsProd);
   delay(100);
+  
+  EEPROM.commit();
+  
   Serial.println("EEPROM SAVED");
 }
 
@@ -46,6 +61,7 @@ String EEPROM_READ(int ADDR)
         s_read+=(char)b_read;
         }
       }
+      delay(100);
       return s_read;
 }
 

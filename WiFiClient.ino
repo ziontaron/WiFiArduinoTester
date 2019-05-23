@@ -68,7 +68,9 @@ void setup() {
   //Serial.begin(9600);
   delay(10);
   
-  EEPROM.begin(512);
+  EEPROM.begin(512);  
+  CFG_LOAD();
+  
 ///////////////////////////////////////////////////
   pinMode(buttonPin, INPUT);
   pinMode(ModeButton, INPUT);
@@ -84,7 +86,6 @@ void setup() {
     modoconf();
   }
  
-  CFG_LOAD();
   // We start by connecting to a WiFi network  
   WiFi.softAPdisconnect (true);
   Wifi_SetUp();
