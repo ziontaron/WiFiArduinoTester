@@ -37,7 +37,8 @@ bool _Loged = false;
 
 String PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Status+"\",\"PartsProduced\": "+PartsProd+"}";
 String UrlPath_q="/Production/Sample?OP="+OP+"&Value="+Value+"&Status="+Status;
-String UrlPath="/Production/Sample";
+//String UrlPath="/Production/Sample";
+String UrlPath="/Production/ArduinoNode";
 /////////////////////////////////////////////////////////////
 
 

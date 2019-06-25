@@ -4,7 +4,8 @@ char APIserver[] = "apps.capsonic.com";    // name address for Google (using DNS
   {
       //PartsProd++;
       //PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Status+"\",\"PartsProduced\": "+PartsProd+"}";
-     PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Device+"\",\"PartsProduced\": "+PartsProd+"}";
+      //PostData = "{\"OP\": \""+OP+"\", \"Value\": "+Value+", \"Status\": \""+Device+"\",\"PartsProduced\": "+PartsProd+"}";
+      PostData = "{\"OP\": \""+OP+"\", \"Name\": \""+Device+"\",\"PartsProduced\": "+PartsProd+"}";
     
       Serial.println("Post Sent");
 //    // if you get a connection, report back via serial:
