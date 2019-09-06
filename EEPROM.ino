@@ -4,6 +4,7 @@ int ADDR_OP = 100;
 int ADDR_ssid = 200;
 int ADDR_password = 300;
 int ADDR_PartsProd = 400;
+int ADDR_HeartBeatRate = 450;
 
 void CFG_SAVE()
 { 
@@ -28,6 +29,8 @@ void CFG_SAVE()
   EEPROM_SAVE(password,ADDR_password);
   delay(100);
   EEPROM_SAVE(PartsProd,ADDR_PartsProd);
+  delay(100);  
+  EEPROM_SAVE(HartBeat,ADDR_HeartBeatRate);
   delay(100);
   
   EEPROM.commit();
@@ -46,6 +49,8 @@ void CFG_LOAD()
   password=EEPROM_READ(ADDR_password);
   delay(100);
   PartsProd=EEPROM_READ(ADDR_PartsProd);
+  delay(100);
+  HartBeat=EEPROM_READ(ADDR_HeartBeatRate);
   delay(100);
 }
 

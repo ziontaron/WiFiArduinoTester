@@ -1,6 +1,6 @@
 void PostTrigger()
 {
-   // read the state of the switch into a local variable:
+  // read the state of the switch into a local variable:
   int reading = digitalRead(buttonPin);
 
   //Serial.println(reading);
@@ -26,10 +26,17 @@ void PostTrigger()
       // only toggle the LED if the new button state is HIGH
       if (buttonState == HIGH) {
         ledState = !ledState;
-        
+
         //Serial.println("button pressed");
-        PostDataFunc();
-        
+        //PostDataFunc();
+
+        PostData = "{\"OP\": \"" + OP + "\", \"Name\": \"" + Device + "\",\"PartsProduced\": " + PartsProd + ",\"MAC\":" + MAC + "}";
+        HTTPPOST(PostData, APIserver, UrlPath);
+
+
+        //        PostData = "{\"Name\": \"" + Device + "\",\"MAC\":" + MAC + "}";
+        //        HTTPPOST(PostData, APIserver, IoTPing);
+
       }
     }
   }
@@ -39,4 +46,4 @@ void PostTrigger()
 
   // save the reading. Next time through the loop, it'll be the lastButtonState:
   lastButtonState = reading;
-  }
+}
