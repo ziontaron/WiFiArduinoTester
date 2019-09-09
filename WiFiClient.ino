@@ -25,9 +25,10 @@ String Value = "110011";
 String Status = "TestWiFi";
 String PartsProd = "1";
 String MAC = "00:00:00:00:00:00";
-String Ver = "1.2";
+String Ver = "1.5";
 String HartBeat = "120";
 bool _HeartBeatEN = true;
+
 
 /////CONFIG FLAGS///////
 
@@ -88,6 +89,9 @@ void setup() {
   pinMode(ModeButton, INPUT);
   pinMode(ledPin, OUTPUT);
   pinMode(ConLed, OUTPUT);
+
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, LOW);
 
   // set initial LED state
   digitalWrite(ledPin, ledState);

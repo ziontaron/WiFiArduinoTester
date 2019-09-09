@@ -5,7 +5,7 @@ void HeartBeatTick()
 
 void NetworkCheck()
 {
-  Serial.println();
+  //Serial.println();
   if (WiFi.status() == WL_CONNECTED) {
     //Serial.println(" WIFI Network Connected");
     
@@ -14,12 +14,12 @@ void NetworkCheck()
 //    if (client.connected()) {
 //    client.println("hello from ESP8266");
 //  }
-     Serial.println("Hart Beat");
+     Serial.println("Heart Beat");
      HTTPPOST(PostData, APIserver, IoTPing);
   } else
   {
     Serial.println(" WIFI Network Not Connected");
   }
-  
+   digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
   _HeartBeatTick=false;
 }

@@ -1,7 +1,7 @@
 String pagina_Login="<!DOCTYPE html>"
 "<html>"
 "<head>"
-"<title>WIFI ARDUINO CYCLE COUNTER</title>"
+"<title>WIFI ARDUINO CYCLE COUNTER ESP-WROOM-32er: "+Ver+"+</title>"
 "<br>"
 "<title>CONTROL PANEL</title>"
 "<meta charset='UTF-8'>"

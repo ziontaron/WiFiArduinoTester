@@ -14,7 +14,7 @@ void Wifi_SetUp()
   while (WiFi.status() != WL_CONNECTED and contconexion < 50)
   {
     ++contconexion;
-    delay(250);
+    delay(500);
     Serial.print(".");
     digitalWrite(ConLed, blinkLed);
     blinkLed = !blinkLed;
