@@ -30,6 +30,8 @@ void PostTrigger()
         //Serial.println("button pressed");
         //PostDataFunc();
 
+
+        Serial.println("SENSOR TRIGERED");
         PostData = "{\"OP\": \"" + OP + "\", \"Name\": \"" + Device + "\",\"PartsProduced\": " + PartsProd + ",\"MAC\":" + MAC + "}";
         HTTPPOST(PostData, APIserver, UrlPath);
 

@@ -6,20 +6,20 @@ char *StringToParse;
 
 
 void CommandParser(String cmd)
-{  
-      //Serial.print("From CommandParser: "+cmd);
-      char charBuf[50];
-      cmd.toCharArray(charBuf, 50);
-      byte words= split_message(charBuf);
-      //print_message(words);
-    
-      for (byte sms_block = 0; sms_block < words; sms_block++) 
-      {
-          String W=Words[sms_block];
-          CommandDefinition(W);
-      }
-      
+{
+  //Serial.print("From CommandParser: "+cmd);
+  char charBuf[50];
+  cmd.toCharArray(charBuf, 50);
+  byte words = split_message(charBuf);
+  //print_message(words);
+
+  for (byte sms_block = 0; sms_block < words; sms_block++)
+  {
+    String W = Words[sms_block];
+    CommandDefinition(W);
   }
+
+}
 
 ////////// ////////// ////////// ////////// ////////// ////////// //////////
 // Split string into individual words and store each word into an array

@@ -17,7 +17,7 @@ void SerialRead()
 {
   ////////////////////////////////////////////////////////
 
-  while (Serial.available()) 
+  while (Serial.available())
   {
     // get the new byte:
     char inChar = (char)Serial.read();
@@ -27,19 +27,19 @@ void SerialRead()
     // do something about it:
     if (inChar == '\n') {
       stringComplete = true;
-    }    
-  delay(10);
-    
-  if (stringComplete)   
+    }
+    delay(10);
+
+    if (stringComplete)
     {
       //Serial.print(inputString);
       // clear the string:
-      
+
       CommandParser(inputString);
       inputString = "";
       stringComplete = false;
     }
   }
-  
+
   ////////////////////////////////////////////////////////
-  }
+}

@@ -1,5 +1,3 @@
-
-
 void Wifi_SetUp()
 {
   bool blinkLed = false;

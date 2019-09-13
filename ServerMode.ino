@@ -39,9 +39,9 @@ void modoconf() {
   WiFi.softAP(ssidConf, passConf);
   IPAddress myIP = WiFi.softAPIP();
   Serial.println("");
-  Serial.print("IP del acces point: ");
+  Serial.print("Access Point IP: ");
   Serial.println(myIP);
-  Serial.println("WebServer iniciado...");
+  Serial.println("WebServer Started...");
 
   server.on("/", paginaconf); //esta es la pagina de configuracion
   server.on("/guardar_conf", guardar_conf); //Graba en la eeprom la configuracion
@@ -137,7 +137,7 @@ void escanear() {
     int n = WiFi.scanNetworks(); //devuelve el número de redes encontradas
     Serial.println("Wifi Scan Finished");
     if (n == 0) { //si no encuentra ninguna red
-      Serial.println("No Wifi signas were found.");
+      Serial.println("No Wifi signals were found.");
       mensaje = "No Wifi signas were found.";
     }
     else

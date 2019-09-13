@@ -39,7 +39,6 @@
 void HTTPPOST(String _PostData, String _APIserver, String _UrlPath)
 {
   WiFiClient client;
-  Serial.println("Post Sent");
   //Serial.println(_APIserver);
   //    // if you get a connection, report back via serial:
   if (client.connect(_APIserver, 80))
@@ -59,11 +58,12 @@ void HTTPPOST(String _PostData, String _APIserver, String _UrlPath)
     //Serial.println(_PostData);
     //Serial.println(client.read());
     client.stop();
+    Serial.println(Device+" Post Sent");
   }
   else
   {
     // if you didn't get a connection to the server:
-    Serial.println("connection failed");
+    Serial.println(Device+" Connection Failed");
   }
   Serial.println();
 }

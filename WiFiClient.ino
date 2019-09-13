@@ -29,7 +29,6 @@ String Ver = "1.5";
 String HartBeat = "120";
 bool _HeartBeatEN = true;
 
-
 /////CONFIG FLAGS///////
 
 bool ChgDevName = false;
@@ -43,8 +42,8 @@ bool _HeartBeat = false;
 bool _HeartBeatTick = false;
 ////////////////////////
 
-String PostData = "{\"OP\": \"" + OP + "\", \"Value\": " + Value + ", \"Status\": \"" + Status + "\",\"PartsProduced\": " + PartsProd + "}";
-String UrlPath_q = "/Production/Sample?OP=" + OP + "&Value=" + Value + "&Status=" + Status;
+String PostData = "";
+//String UrlPath_q = "/Production/Sample?OP=" + OP + "&Value=" + Value + "&Status=" + Status;
 //String UrlPath="/Production/Sample";
 String UrlPath = "/Production/ArduinoNode";
 String IoTPing = "/Production/IoTPing";
